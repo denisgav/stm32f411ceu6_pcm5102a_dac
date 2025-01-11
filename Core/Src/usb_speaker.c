@@ -1,3 +1,4 @@
+#include "main.h"
 #include "usb_speaker.h"
 #include "common_types.h"
 #include "volume_ctrl.h"
@@ -9,7 +10,7 @@
   const uint32_t sample_rates[] = {44100, 48000};
 #endif
 
-uint32_t current_sample_rate  = 48000;
+uint32_t current_sample_rate  = I2S_SPK_RATE_DEF;
 
 #define N_SAMPLE_RATES  TU_ARRAY_SIZE(sample_rates)
 
@@ -392,29 +393,3 @@ bool tud_audio_rx_done_pre_read_cb(uint8_t rhport, uint16_t n_bytes_received, ui
 
   return true;
 }
-
-// // Invoked when received GET_REPORT control request
-// // Unused here
-// uint16_t tud_hid_get_report_cb(uint8_t itf, uint8_t report_id, hid_report_type_t report_type, uint8_t* buffer, uint16_t reqlen)
-// {
-//   // TODO not Implemented
-//   (void) itf;
-//   (void) report_id;
-//   (void) report_type;
-//   (void) buffer;
-//   (void) reqlen;
-
-//   return 0;
-// }
-
-// // Invoked when received SET_REPORT control request or
-// // Unused here
-// void tud_hid_set_report_cb(uint8_t itf, uint8_t report_id, hid_report_type_t report_type, uint8_t const* buffer, uint16_t bufsize)
-// {
-//   // This example doesn't use multiple report and report ID
-//   (void) itf;
-//   (void) report_id;
-//   (void) report_type;
-//   (void) buffer;
-//   (void) bufsize;
-// }

@@ -67,7 +67,7 @@ void Error_Handler(void);
 #endif //m_new
 
 #ifndef I2S_SPK_RATE_DEF
-    #define I2S_SPK_RATE_DEF (48000)
+    #define I2S_SPK_RATE_DEF (44100)
 #endif //I2S_SPK_RATE_DEF
 
 #define SAMPLE_BUFFER_SIZE  (96000/1000) // MAX sample rate divided by 1000. Size of 1 ms sample

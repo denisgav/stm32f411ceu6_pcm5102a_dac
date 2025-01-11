@@ -490,7 +490,7 @@ void usb_speaker_tud_audio_rx_done_pre_read_handler(uint8_t rhport,
 			spk_machine_i2s_write_stream(&spk_16b_i2s_buffer[0],
 					usb_sample_count); // Number of words
 			//}
-		} else if (speaker_settings.resolution == 24) {
+		} else {
 			int32_t *in = (int32_t*) spk_usb_read_buf;
 			usb_sample_count = usb_spk_data_size / 8; // 8 bytes per sample 4b left, 4b right
 
@@ -559,7 +559,7 @@ int spk_machine_i2s_write_stream(uint32_t *buf_in, uint32_t size) {
 		return 0;
 	}
 
-	if (speaker_settings.resolution == 24) {
+	if (speaker_settings.resolution != 16) {
 		for (uint32_t a_index = 0; a_index < size; a_index++) {
 			if (ringbuf_push_half_word_swap(&spk_ring_buffer,
 					buf_in[a_index]) == false) {
@@ -579,7 +579,7 @@ int spk_machine_i2s_write_stream(uint32_t *buf_in, uint32_t size) {
 
 void HAL_I2S_TxHalfCpltCallback(I2S_HandleTypeDef *hi2s) {
 	int num_of_words_feed =
-			(speaker_settings.resolution == 24) ?
+			(speaker_settings.resolution != 16) ?
 					speaker_settings.samples_in_i2s_frame_min :
 					speaker_settings.samples_in_i2s_frame_min / 2;
 	feed_spk_dma(&spk_i2s_buf[0], num_of_words_feed);
@@ -587,7 +587,7 @@ void HAL_I2S_TxHalfCpltCallback(I2S_HandleTypeDef *hi2s) {
 
 void HAL_I2S_TxCpltCallback(I2S_HandleTypeDef *hi2s) {
 	int num_of_words_feed =
-			(speaker_settings.resolution == 24) ?
+			(speaker_settings.resolution != 16) ?
 					speaker_settings.samples_in_i2s_frame_min :
 					speaker_settings.samples_in_i2s_frame_min / 2;
 	feed_spk_dma(&spk_i2s_buf[num_of_words_feed], num_of_words_feed);

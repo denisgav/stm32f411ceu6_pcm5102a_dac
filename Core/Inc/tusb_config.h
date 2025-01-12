@@ -108,7 +108,7 @@ extern "C" {
 #define CFG_TUD_AUDIO_FUNC_1_DESC_LEN                                TUD_AUDIO_SPEAKER_STEREO_FB_DESC_LEN //TUD_AUDIO_HEADSET_STEREO_DESC_LEN
 
 // How many formats are used, need to adjust USB descriptor if changed
-#define CFG_TUD_AUDIO_FUNC_1_N_FORMATS                               2
+#define CFG_TUD_AUDIO_FUNC_1_N_FORMATS                               3
 
 // Audio format type I specifications
 #define CFG_TUD_AUDIO_FUNC_1_MAX_SAMPLE_RATE                         48000     // 32bit/48kHz is the best quality for full-speed, high-speed is needed beyond this
